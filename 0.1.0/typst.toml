@@ -1,0 +1,7 @@
+[package]
+name = "typst-uon"
+version = "0.1.0"
+entrypoint = "typst-uon.typ"
+authors = ["Ian Knight <ian.knight2@nottingham.ac.uk>"]
+license = "MIT"
+description = "Colours and layouts for a consistent UoN document"
