@@ -29,6 +29,32 @@
   } else {
     rgb("#b91c2e")
   },
+  orange: (tint: 100%) => if tint == 5% {
+    rgb("#fff9f3")
+  } else if tint == 20% {
+    rgb("#fee6ce")
+  } else if tint == 40% {
+    rgb("#fdcd9d")
+  } else if tint == 60% {
+    rgb("#fbb36b")
+  } else if tint == 80% {
+    rgb("#fa9a3a")
+  } else {
+    rgb("#f98109")
+  },
+  green: (tint: 100%) => if tint == 5% {
+    rgb("#f2f7f5")
+  } else if tint == 20% {
+    rgb("#ccdfd7")
+  } else if tint == 40% {
+    rgb("#99bfaf")
+  } else if tint == 60% {
+    rgb("#669f86")
+  } else if tint == 80% {
+    rgb("#337f5e")
+  } else {
+    rgb("#005f36")
+  },
   sky-blue: (tint: 100%) => if tint == 5% {
     rgb("#f2fafc")
   } else if tint == 20% {
@@ -49,7 +75,7 @@
   },
 )
 
-#let uon-project(title: "", authors: (), two-column: true, body) = {
+#let uon-project(title: "", authors: (), two-column: true, accent-colour: uon-colour.red, body) = {
   set document(author: authors, title: title)
   set text(
     size: 10pt,
@@ -72,8 +98,8 @@
   )
 
   set heading(numbering: "1.")
-  show heading.where(level: 1): set text(size: 17.5pt, fill: (uon-colour.red)())
-  show heading.where(level: 2): set text(size: 15pt, fill: (uon-colour.red)(tint: 80%))
+  show heading.where(level: 1): set text(size: 17.5pt, fill: accent-colour())
+  show heading.where(level: 2): set text(size: 15pt, fill: accent-colour(tint: 80%))
   show heading.where(level: 3): set text(size: 12.5pt, weight: "regular", style: "italic")
 
   align(center, block(
@@ -93,7 +119,8 @@
 
   v(1cm)
 
-  show: columns.with(if two-column { 2 } else { 1 })
+  let num-cols = if two-column { 2 } else { 1 }
+  show: columns.with(num-cols)
 
   body
 }
