@@ -78,7 +78,7 @@
 #let uon-project(
   title: "",
   authors: (),
-  fonts: (main: "Arial", code: "Fira Mono", math: "Fira Math"),
+  fonts: (main: "Libertinus Serif", code: "DejaVu Sans Mono", math: "New Computer Modern Math"),
   accent-colour: uon-colour.red,
   num-columns: 1,
   body,
