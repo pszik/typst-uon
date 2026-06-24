@@ -75,10 +75,10 @@
   },
 )
 
-#let uon-project(title: "", authors: (), two-column: true, accent-colour: uon-colour.red, body) = {
+#let uon-project(title: "", authors: (), num-columns: 1, accent-colour: uon-colour.red, body) = {
   set document(author: authors, title: title)
   set text(
-    size: 10pt,
+    size: 11pt,
     lang: "en",
     region: "gb",
     font: "Fira Sans",
@@ -86,11 +86,12 @@
   )
 
   show raw: set text(font: "Fira Mono")
+  show raw.where(block: false): set text(size: 11pt)
   show math.equation: set text(font: "Fira Math")
 
   show: booktabs-default-table-style
-  show: codly-init.with()
-  codly(languages: codly-languages)
+  show: codly-init
+  codly(languages: codly-languages, zebra-fill: (uon-colour.blue)(tint: 5%))
 
   set page(
     paper: "a4",
@@ -98,12 +99,12 @@
   )
 
   set heading(numbering: "1.")
-  show heading.where(level: 1): set text(size: 17.5pt, fill: accent-colour())
-  show heading.where(level: 2): set text(size: 15pt, fill: accent-colour(tint: 80%))
-  show heading.where(level: 3): set text(size: 12.5pt, weight: "regular", style: "italic")
+  show heading.where(level: 1): set text(size: 18.25pt, fill: accent-colour())
+  show heading.where(level: 2): set text(size: 15.5pt, fill: accent-colour(tint: 80%))
+  show heading.where(level: 3): set text(size: 12.75pt, weight: "regular", style: "italic")
 
   align(center, block(
-    text(weight: "bold", size: 20pt, title),
+    text(weight: "bold", size: 22pt, title),
   ))
 
   pad(
@@ -119,8 +120,7 @@
 
   v(1cm)
 
-  let num-cols = if two-column { 2 } else { 1 }
-  show: columns.with(num-cols)
+  show: columns.with(num-columns)
 
   body
 }
@@ -130,3 +130,14 @@
   counter(heading).update(0)
   body
 }
+
+#let task-counter = counter("task")
+#let task(body) = block(
+  fill: (uon-colour.blue)(tint: 5%),
+  inset: 5pt,
+  width: 100%,
+  [
+    #task-counter.step()
+    *Task #context task-counter.display():* #body
+  ],
+)
