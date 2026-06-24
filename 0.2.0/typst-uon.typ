@@ -75,19 +75,26 @@
   },
 )
 
-#let uon-project(title: "", authors: (), num-columns: 1, accent-colour: uon-colour.red, body) = {
+#let uon-project(
+  title: "",
+  authors: (),
+  fonts: (main: "Arial", code: "Fira Mono", math: "Fira Math"),
+  accent-colour: uon-colour.red,
+  num-columns: 1,
+  body,
+) = {
   set document(author: authors, title: title)
   set text(
     size: 11pt,
     lang: "en",
     region: "gb",
-    font: "Fira Sans",
+    font: font.main,
     fill: (uon-colour.blue)(),
   )
 
-  show raw: set text(font: "Fira Mono")
+  show raw: set text(font: fonts.code)
   show raw.where(block: false): set text(size: 11pt)
-  show math.equation: set text(font: "Fira Math")
+  show math.equation: set text(font: fonts.math)
 
   show: booktabs-default-table-style
   show: codly-init
